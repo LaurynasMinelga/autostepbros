@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+ {% block body %}
+     <center><div class="btn-group">
+         {% if (is_granted('ROLE_ADMIN')) %}
+             <a href="{{ path('addProduct') }}" class="btn btn-info">Pridėti prekę</a>
+
+         {% endif %}
+
+
+
+     <a href="{{ path('payment') }}" class="btn btn-info">Prekių apmokėjimas</a>
+     <a href="{{ path('orderedShop') }}" class="btn btn-info">Užsakytos prekės</a>
+         </div></center>
+     <br>
+     <center>
+     <div style="max-width:70%;">
+     <table class="table table-striped table-hover ">
+
+             <tr>
+                     <td>Nr.</td>
+                     <td>Prekės kodas</td>
+                     <td>Pavadinimas</td>
+                     <td>Kaina</td>
+
+                 </tr>
+
+             {% for product in products %}
+                     <tr>
+                             <th>{{ loop.index }}</th>
+                             <td>{{ product.code }}</td>
+                             <td>{{ product.name }}</td>
+                             <td>{{ product.price }}</td>
+
+                             {% if (is_granted('ROLE_ADMIN')) %}
+                                     <td>
+                                             <a href="{{ path('editProduct', {id: product.id}) }}">
+                                                     <button type="button" class="btn btn-primary">Redaguoti</button>
+                                                 </a>
+                                             <a href="{{ path('deleteProduct', {id: product.id}) }}">
+                                                     <button type="button" class="btn btn-danger">Šalinti</button>
+                                                 </a>
+                                         </td>
+
+                                 {% endif %}
+                             <td>
+                                     <a href="{{ path('addOrder', {id: product.id}) }}">
+                                             <button type="button" class="btn btn-primary">Pridėti prie užsakymo</button>
+                                         </a>
+                                 </td>
+                         </tr>
+                 {% endfor %}
+         </table>
+     </div>
+     </center>
+ {% endblock %}

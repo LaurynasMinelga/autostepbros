@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block body %}
+
+    <center><h2>Važtaraščių sąrašas</h2>
+        <br>
+    <button onclick="goBack()" class="btn btn-warning">Grįžti atgal</button>
+    <a href="{{ path('addWayBill') }}" class="btn btn-primary">Pridėti važtaraštį</a></li>
+    <br>
+    <br>
+    <br>
+    <div style="max-width:50%;">
+    <table class="table table-striped table-hover table-bordered">
+
+        <tr>
+            <td>Nr.</td>
+            <td>Tiekėjas</td>
+            <td>Kiekis</td>
+            <td>Suma (€)</td>
+        </tr>
+
+        {% for waybill in waybills %}
+            <tr>
+                <th>{{ loop.index }}</th>
+                <td>{{ waybill.supplier.name }}</td>
+                <td>{{ waybill.quantity }}</td>
+                <td>{{ waybill.totalPrice }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+    </center>
+    <script>
+        function goBack() {
+            window.history.back()
+        }
+    </script>
+{% endblock %}

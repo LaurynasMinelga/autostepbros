@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+
+    <title> AutoStepBroliai</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS File -->
+    <style src="../web/css/style.css"></style>
+
+</head>
+
+<body>
+
+{#<div class="container">#}
+
+    {#{% include('flash-messages.html.twig') %}#}
+
+
+{#</div>#}
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">AUTOSTEPBROLIAI</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+<ul class="nav navbar-nav">
+
+
+    {% if app.user %}
+        <li><a href="/">Pagrindinis puslapis</a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('allUsers') }}">Vartotojų sąrašas</a></li>
+        {% endif %}
+
+        <li><a href="{{ path('allVisits') }}">Apsilankymai servise</a></li>
+        <li><a href="{{ path('shop') }}">Parduotuvė</a></li>
+
+        {% if is_granted('ROLE_ADMIN') or (is_granted('ROLE_MECHANIC'))%}
+        <li><a href="{{ path('suppliers') }}">Tiekėjų valdymas</a></li>
+        {% endif %}
+        <li><a href="{{ path('works') }}">Darbų valdymas</a></li>
+        {% if is_granted('ROLE_ADMIN') or (is_granted('ROLE_MECHANIC'))%}
+        <li><a href="{{ path('repair') }}">Remontas</a></li>
+
+        {% endif %}
+        <li><a href="{{ path('contact') }}">Parašykite mums!</a></li>
+
+
+    {% else %}
+        <li><a href="/login">Prisijungimas</a></li>
+    {% endif %}
+</ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navi"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Atsijungti</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block body %}
+
+
+
+{% endblock %}
+
+
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>
