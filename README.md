@@ -1,3 +1,5 @@
+Project with 5 subsystems, each subsystem for 1 student. 
+
 1.Install xampp
 
 2.Install composer
